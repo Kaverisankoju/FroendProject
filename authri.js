@@ -1,3 +1,13 @@
+// ===== AUTH GUARD =====
+const publicPages = ["login.html", "register.html"];
+
+const currentPage = window.location.pathname.split("/").pop();
+
+const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (!loggedInUser && !publicPages.includes(currentPage)) {
+  window.location.href = "login.html";
+}
 // ===== REGEX =====
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -156,11 +166,6 @@ updateNavbarAuth();
 
 
 // ===== SHOW / HIDE PASSWORD =====
-function togglePassword(id) {
-  let input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
-
 
 function togglePassword(inputId, icon) {
   const input = document.getElementById(inputId);
