@@ -1,10 +1,19 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+window.cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 let cartDiv = document.getElementById("cart-items");
 let totalDiv = document.getElementById("total");
 
 function renderCart() {
+  if (!cartDiv || !totalDiv) return;
+
   cartDiv.innerHTML = "";
   let total = 0;
+
+  if (cart.length === 0) {
+    cartDiv.innerHTML = "<p>Your cart is empty</p>";
+    totalDiv.innerText = "Total: ₹0";
+    return;
+  }
 
   cart.forEach((item, index) => {
     total += item.price * item.qty;
@@ -31,4 +40,19 @@ function removeItem(index) {
   renderCart();
 }
 
+function placeOrder() {
+  if (cart.length === 0) {
+    document.getElementById("orderMsg").innerText = "❌ Your cart is empty!";
+    document.getElementById("orderMsg").style.color = "red";
+    return;
+  }
+
+  document.getElementById("orderMsg").innerText =
+    "🎉 Your order is confirmed! Thank you for shopping with Kash.";
+  document.getElementById("orderMsg").style.color = "green";
+
+  localStorage.removeItem("cart");
+  cart = [];
+  renderCart();
+}
 renderCart();

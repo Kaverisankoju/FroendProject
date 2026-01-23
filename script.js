@@ -1,56 +1,45 @@
-const bar = document.getElementById('bar');
-const close = document.getElementById('close');
-const nav = document.getElementById('navbar');
-
-if (bar){
-    bar.addEventListener('click',()=>{
-        nav.classList.add('active')
-    })
-}
-
-if (close){
-    close.addEventListener('click',()=>{
-        nav.classList.remove('active')
-    })
-}
-
 // ===== CART LOGIC =====
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+window.cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-document.querySelectorAll(".add-to-cart").forEach((btn, idx) => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
+const addButtons = document.querySelectorAll(".add-to-cart");
 
-    let product = btn.closest(".pro");
+// 🔥 Only attach listeners if buttons exist
+if (addButtons.length > 0) {
+  addButtons.forEach((btn, idx) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    let img = product.querySelector("img").src;
-    let name = product.querySelector(".des h5").innerText;
-    let priceText = product.querySelector(".des h4").innerText;
-    let price = parseInt(priceText.replace("₹", "").replace(",", ""));
+      let product = btn.closest(".pro");
+      if (!product) return;
 
-    // Unique ID using image + index
-    let id = img + idx;
+      let img = product.querySelector("img").src;
+      let name = product.querySelector(".des h5").innerText;
+      let priceText = product.querySelector(".des h4").innerText;
+      let price = parseInt(priceText.replace("₹", "").replace(",", ""));
 
-    let existing = cart.find((item) => item.id === id);
+      let id = img + idx;
 
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({
-        id,
-        img,
-        name,
-        price,
-        qty: 1
-      });
-    }
+      let existing = cart.find((item) => item.id === id);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id,
+          img,
+          name,
+          price,
+          qty: 1
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert("Added to cart!");
+      updateCartCount();
+    });
   });
-});
-
-
+}
 
 function updateCartCount() {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -63,3 +52,5 @@ function updateCartCount() {
     badge.style.display = count > 0 ? "inline-block" : "none";
   }
 }
+
+updateCartCount();

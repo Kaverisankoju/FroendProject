@@ -907,6 +907,29 @@ footer .copyright{
 
 
 
+.order-btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #2ecc71;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.order-btn:hover {
+  background: #27ae60;
+}
+
+.order-msg {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+
 /* start media query  */
 
 @media (max-width:799px) {

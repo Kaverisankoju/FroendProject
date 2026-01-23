@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Kash</title>
+  <link rel="stylesheet" href="authri.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+  
+
+<h2>Create Account</h2>
+<p>Join <span class="brand-name">Kash</span>  shopping experience</p>
+
+
+    <input type="text" id="regName" placeholder="Full name">
+    <small id="regNameError"></small>
+
+    <input type="email" id="regEmail" placeholder="Email address">
+    <small id="regEmailError"></small>
+
+   <div class="password-field">
+  <input type="password" id="regPassword" placeholder="Password">
+  <span class="toggle-password" onclick="togglePassword('regPassword', this)">
+    👁
+  </span>
+</div>
+
+<small id="regPasswordError"></small>
+
+<small id="passwordRules">
+  Password must contain:
+  <br>• 8 characters  
+  <br>• 1 uppercase  
+  <br>• 1 lowercase  
+  <br>• 1 number  
+  <br>• 1 special char
+</small>
+
+    <button onclick="registerUser()">Register</button>
+
+    <p class="switch">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+
+    <p id="regMsg" class="msg"></p>
+  </div>
+</div>
+
+<script src="authri.js"></script>
+</body>
+</html>
